@@ -1,0 +1,108 @@
+================================================================================
+  CAMPUS BOOKING SYSTEM - KIẾN TRÚC BACKEND
+================================================================================
+
+Mục đích: Team backend đọc file này để hiểu code trước khi defense.
+
+--------------------------------------------------------------------------------
+1. KIẾN TRÚC 3 TẦNG
+--------------------------------------------------------------------------------
+
+  [ VIEW ]          auth/*.php, user/*.php, admin/*.php
+      |             → Chỉ hiển thị HTML, nhận $_GET/$_POST
+      v
+  [ SERVICE ]       backend/services/*.php
+      |             → Business logic, validate, transaction
+      v
+  [ MODEL ]         backend/models/*.php
+                    → SQL thuần (CRUD từng bảng)
+
+  Quy tắc vàng:
+  - View KHÔNG viết SQL
+  - Model KHÔNG validate business rule
+  - Service KHÔNG echo HTML
+
+--------------------------------------------------------------------------------
+2. PHÂN CÔNG 3 MODULE (theo team)
+--------------------------------------------------------------------------------
+
+  MODULE 1 - Châu          → AuthService, UserService, UserModel, RoleModel
+  MODULE 2 - Vanh + Linh   → FacilityService, FacilityModel, FacilityRuleModel
+  MODULE 3 - Vanh + Linh   → BookingService, BookingValidator, BookingModel
+
+--------------------------------------------------------------------------------
+3. FILE QUAN TRỌNG KHI DEFENSE
+--------------------------------------------------------------------------------
+
+  Register flow:
+    auth/register.php → AuthService::register()
+      → AuthValidator::validateRegister()
+      → UserModel::emailExists()
+      → password_hash()
+      → INSERT users + user_profiles (transaction)
+
+  Login flow:
+    auth/login.php → AuthService::login()
+      → UserModel::findByEmailWithRole()
+      → password_verify()
+      → check account_status = active
+      → Auth::login() tạo session
+
+  Booking flow (QUAN TRỌNG NHẤT):
+    user/create_booking.php → BookingService::createBooking()
+      → BookingValidator::validate()  (10 business rules)
+      → BookingDetailModel::hasConflict()  (công thức trùng lịch)
+      → INSERT bookings (PENDING) + booking_details
+
+  Approve/Reject:
+    admin/update_booking_status.php → BookingService::approve() / reject()
+
+  Cancel:
+    user/cancel_booking.php → BookingService::cancel()
+      → check booking.user_id = session user_id
+
+--------------------------------------------------------------------------------
+4. CÔNG THỨC TRÙNG LỊCH (Module 3 - hay hỏi nhất)
+--------------------------------------------------------------------------------
+
+  File: backend/models/BookingDetailModel.php → hasConflict()
+
+  New Start < Existing End  AND  New End > Existing Start
+
+  Chỉ check booking status: PENDING, APPROVED
+  REJECTED / CANCELLED không giữ slot
+
+  Ví dụ:
+    Booking cũ: 08:00 - 10:00 (APPROVED)
+    Booking mới: 09:00 - 11:00 → TRÙNG (vì 09:00 < 10:00 và 11:00 > 08:00)
+
+--------------------------------------------------------------------------------
+5. SESSION SAU LOGIN
+--------------------------------------------------------------------------------
+
+  $_SESSION['user_id']    = ID trong bảng users
+  $_SESSION['full_name']  = Tên hiển thị
+  $_SESSION['role_name']  = 'ADMIN' hoặc 'USER'
+
+  File: backend/core/Auth.php
+
+--------------------------------------------------------------------------------
+6. 9 BẢNG DATABASE
+--------------------------------------------------------------------------------
+
+  roles, users, user_profiles
+  facility_categories, facilities, facility_rules
+  booking_statuses, bookings, booking_details
+
+  Schema: database/schema.sql
+
+--------------------------------------------------------------------------------
+7. CÁCH CHẠY
+--------------------------------------------------------------------------------
+
+  1. Import database/schema.sql hoặc mở database/install.php
+  2. Sửa config/database.php nếu MySQL có password
+  3. http://localhost/webfinal/
+  4. Admin: admin@campus.com / password
+
+================================================================================
