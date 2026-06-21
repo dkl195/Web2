@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         isset($_POST['requires_approval']) ? 1 : 0
     );
     Flash::success('Rule updated.');
-    header('Location: /webfinal/admin/facility_rules.php');
+    header('Location: /web 2 final/Web2/admin/facility_rules.php');
     exit;
 }
 
@@ -27,7 +27,7 @@ if ($flash) echo '<div class="alert alert-success">' . e($flash['message']) . '<
 <div class="card">
     <div class="card-header">
         <h2>Facility Booking Rules</h2>
-        <a href="/webfinal/admin/facilities.php" class="btn btn-secondary btn-sm">Back</a>
+        <a href="/web 2 final/Web2/admin/facilities.php" class="btn btn-secondary btn-sm">Back</a>
     </div>
     <div class="table-responsive">
         <table>

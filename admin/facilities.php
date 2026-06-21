@@ -8,7 +8,7 @@ $facilityService = new FacilityService();
 if (isset($_GET['delete'])) {
     $result = $facilityService->deleteFacility((int) $_GET['delete']);
     Flash::set('success', $result['message']);
-    header('Location: /webfinal/admin/facilities.php');
+    header('Location: /web 2 final/Web2/admin/facilities.php');
     exit;
 }
 
@@ -25,9 +25,9 @@ if ($flash) {
     <div class="card-header">
         <h2>Manage Facilities</h2>
         <div style="display:flex;gap:0.5rem;">
-            <a href="/webfinal/admin/categories.php" class="btn btn-secondary btn-sm">Categories</a>
-            <a href="/webfinal/admin/facility_rules.php" class="btn btn-secondary btn-sm">Rules</a>
-            <a href="/webfinal/admin/facility_form.php" class="btn btn-primary btn-sm">+ Add Facility</a>
+            <a href="/web 2 final/Web2/admin/categories.php" class="btn btn-secondary btn-sm">Categories</a>
+            <a href="/web 2 final/Web2/admin/facility_rules.php" class="btn btn-secondary btn-sm">Rules</a>
+            <a href="/web 2 final/Web2/admin/facility_form.php" class="btn btn-primary btn-sm">+ Add Facility</a>
         </div>
     </div>
     <div class="table-responsive">
@@ -46,8 +46,8 @@ if ($flash) {
                     <td><?= formatTime($f['open_time']) ?> - <?= formatTime($f['close_time']) ?></td>
                     <td><span class="badge badge-<?= $f['facility_status'] ?>"><?= e($f['facility_status']) ?></span></td>
                     <td>
-                        <a href="/webfinal/admin/facility_detail.php?id=<?= $f['facility_id'] ?>" class="btn btn-secondary btn-sm">View</a>
-                        <a href="/webfinal/admin/facility_form.php?id=<?= $f['facility_id'] ?>" class="btn btn-secondary btn-sm">Edit</a>
+                        <a href="/web 2 final/Web2/admin/facility_detail.php?id=<?= $f['facility_id'] ?>" class="btn btn-secondary btn-sm">View</a>
+                        <a href="/web 2 final/Web2/admin/facility_form.php?id=<?= $f['facility_id'] ?>" class="btn btn-secondary btn-sm">Edit</a>
                         <a href="?delete=<?= $f['facility_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">Delete</a>
                     </td>
                 </tr>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Run once: http://localhost/webfinal/database/install.php
+ * Run once: http://localhost/web 2 final/Web2/database/install.php
  * Creates database and all tables with sample data.
  */
 $sql = file_get_contents(__DIR__ . '/schema.sql');
@@ -18,7 +18,7 @@ try {
     }
 
     echo '<h2 style="color:#006994;">Database installed successfully!</h2>';
-    echo '<p><a href="/webfinal/index.php">Go to Homepage</a></p>';
+    echo '<p><a href="/web 2 final/Web2/index.php">Go to Homepage</a></p>';
     echo '<p>Admin login: admin@campus.com / password</p>';
 } catch (PDOException $e) {
     echo '<h2 style="color:red;">Error: ' . htmlspecialchars($e->getMessage()) . '</h2>';

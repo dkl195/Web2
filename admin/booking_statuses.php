@@ -13,14 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $bookingService->saveStatus((int) $_POST['status_id'], $_POST['status_code'] ?? '', $_POST['status_name'] ?? '');
     }
     Flash::set($result['success'] ? 'success' : 'error', $result['message'] ?? 'Saved.');
-    header('Location: /webfinal/admin/booking_statuses.php');
+    header('Location: /web 2 final/Web2/admin/booking_statuses.php');
     exit;
 }
 
 if (isset($_GET['delete'])) {
     $result = $bookingService->deleteStatus((int) $_GET['delete']);
     Flash::set($result['success'] ? 'success' : 'error', $result['message']);
-    header('Location: /webfinal/admin/booking_statuses.php');
+    header('Location: /web 2 final/Web2/admin/booking_statuses.php');
     exit;
 }
 
@@ -34,7 +34,7 @@ if ($flash) echo '<div class="alert alert-' . ($flash['type'] === 'success' ? 's
 <div class="card">
     <div class="card-header">
         <h2>Manage Booking Statuses</h2>
-        <a href="/webfinal/admin/bookings.php" class="btn btn-secondary btn-sm">Back</a>
+        <a href="/web 2 final/Web2/admin/bookings.php" class="btn btn-secondary btn-sm">Back</a>
     </div>
     <form method="POST" class="form-box">
         <input type="hidden" name="action" value="create">

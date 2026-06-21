@@ -3,7 +3,7 @@ require_once __DIR__ . '/../includes/auth.php';
 requireLogin();
 
 if (isAdmin()) {
-    header('Location: /webfinal/admin/dashboard.php');
+    header('Location: ' . BASE_URL . '/admin/dashboard.php');
     exit;
 }
 
@@ -13,7 +13,7 @@ $facility = $facilityService->getAvailableFacility($facilityId);
 
 if (!$facility) {
     Flash::error('Facility not available.');
-    header('Location: /webfinal/user/facilities.php');
+    header('Location: ' . BASE_URL . '/user/facilities.php');
     exit;
 }
 
@@ -29,7 +29,7 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="card">
     <div class="card-header">
         <h2>Booking Form</h2>
-        <a href="/webfinal/user/facility_detail.php?id=<?= $facilityId ?>" class="btn btn-secondary btn-sm">Back</a>
+        <a href="<?= BASE_URL ?>/user/facility_detail.php?id=<?= $facilityId ?>" class="btn btn-secondary btn-sm">Back</a>
     </div>
 
     <?php foreach ($errors as $err): ?>
@@ -43,7 +43,7 @@ require_once __DIR__ . '/../includes/header.php';
         <li><span class="label">Max Duration</span><span class="value"><?= $facility['max_booking_hours'] ?? 3 ?> hour(s)</span></li>
     </ul>
 
-    <form method="POST" action="/webfinal/user/create_booking.php">
+    <form method="POST" action="/web 2 final/Web2/user/create_booking.php">
         <input type="hidden" name="facility_id" value="<?= $facilityId ?>">
         <div class="form-row">
             <div class="form-group">

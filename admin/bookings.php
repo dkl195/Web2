@@ -9,7 +9,7 @@ $statusFilter = $_GET['status'] ?? '';
 if (isset($_GET['delete'])) {
     $bookingService->deleteBooking((int) $_GET['delete']);
     Flash::success('Booking deleted.');
-    header('Location: /webfinal/admin/bookings.php');
+    header('Location: /web 2 final/Web2/admin/bookings.php');
     exit;
 }
 
@@ -25,7 +25,7 @@ if ($flash) {
 <div class="card">
     <div class="card-header">
         <h2>Manage Bookings</h2>
-        <a href="/webfinal/admin/booking_statuses.php" class="btn btn-secondary btn-sm">Statuses</a>
+        <a href="/web 2 final/Web2/admin/booking_statuses.php" class="btn btn-secondary btn-sm">Statuses</a>
     </div>
     <form method="GET" class="filter-bar">
         <div class="form-group">
@@ -54,7 +54,7 @@ if ($flash) {
                     <td><?= $b['participant_count'] ?></td>
                     <td><span class="badge <?= statusBadgeClass($b['status_code']) ?>"><?= e($b['status_name']) ?></span></td>
                     <td>
-                        <a href="/webfinal/admin/booking_detail.php?id=<?= $b['booking_id'] ?>" class="btn btn-secondary btn-sm">View</a>
+                        <a href="/web 2 final/Web2/admin/booking_detail.php?id=<?= $b['booking_id'] ?>" class="btn btn-secondary btn-sm">View</a>
                         <a href="?delete=<?= $b['booking_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">Delete</a>
                     </td>
                 </tr>

@@ -15,7 +15,7 @@ $f = [
 
 if ($isEdit) {
     $row = $facilityService->getFacilityWithRule($id);
-    if (!$row) { header('Location: /webfinal/admin/facilities.php'); exit; }
+    if (!$row) { header('Location: /web 2 final/Web2/admin/facilities.php'); exit; }
     $f = $row;
     $f['open_time'] = formatTime($f['open_time']);
     $f['close_time'] = formatTime($f['close_time']);
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $facilityService->saveFacility($isEdit ? $id : null, $data);
     if ($result['success']) {
         Flash::success($isEdit ? 'Facility updated.' : 'Facility created.');
-        header('Location: /webfinal/admin/facilities.php');
+        header('Location: /web 2 final/Web2/admin/facilities.php');
         exit;
     }
     $errors = $result['errors'] ?? ['Error'];
@@ -53,7 +53,7 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="card">
     <div class="card-header">
         <h2><?= $isEdit ? 'Edit Facility' : 'Add Facility' ?></h2>
-        <a href="/webfinal/admin/facilities.php" class="btn btn-secondary btn-sm">Back</a>
+        <a href="/web 2 final/Web2/admin/facilities.php" class="btn btn-secondary btn-sm">Back</a>
     </div>
     <?php foreach ($errors as $err): ?><div class="alert alert-error"><?= e($err) ?></div><?php endforeach; ?>
     <form method="POST">

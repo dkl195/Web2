@@ -8,7 +8,7 @@ $facilityService = new FacilityService();
 if (isset($_GET['delete'])) {
     $result = $facilityService->deleteCategory((int) $_GET['delete']);
     Flash::set($result['success'] ? 'success' : 'error', $result['message']);
-    header('Location: /webfinal/admin/categories.php');
+    header('Location: /web 2 final/Web2/admin/categories.php');
     exit;
 }
 
@@ -22,7 +22,7 @@ if ($flash) echo '<div class="alert alert-' . ($flash['type'] === 'success' ? 's
 <div class="card">
     <div class="card-header">
         <h2>Manage Categories</h2>
-        <a href="/webfinal/admin/category_form.php" class="btn btn-primary btn-sm">+ Add Category</a>
+        <a href="/web 2 final/Web2/admin/category_form.php" class="btn btn-primary btn-sm">+ Add Category</a>
     </div>
     <div class="table-responsive">
         <table>
@@ -35,7 +35,7 @@ if ($flash) echo '<div class="alert alert-' . ($flash['type'] === 'success' ? 's
                     <td><?= e($c['description'] ?? '-') ?></td>
                     <td><?= $c['facility_count'] ?></td>
                     <td>
-                        <a href="/webfinal/admin/category_form.php?id=<?= $c['category_id'] ?>" class="btn btn-secondary btn-sm">Edit</a>
+                        <a href="/web 2 final/Web2/admin/category_form.php?id=<?= $c['category_id'] ?>" class="btn btn-secondary btn-sm">Edit</a>
                         <?php if ((int)$c['facility_count'] === 0): ?>
                             <a href="?delete=<?= $c['category_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">Delete</a>
                         <?php endif; ?>

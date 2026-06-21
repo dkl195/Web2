@@ -7,7 +7,7 @@ require_once __DIR__ . '/../includes/auth.php';
 requireLogin();
 
 if (isAdmin()) {
-    header('Location: /webfinal/admin/bookings.php');
+    header('Location: /web 2 final/Web2/admin/bookings.php');
     exit;
 }
 
@@ -16,5 +16,5 @@ $bookingService = new BookingService();
 $result = $bookingService->cancel($bookingId, Auth::userId());
 
 Flash::set($result['success'] ? 'success' : 'error', $result['message']);
-header('Location: /webfinal/user/my_bookings.php');
+header('Location: /web 2 final/Web2/user/my_bookings.php');
 exit;

@@ -64,7 +64,7 @@ class AuthService
 
             Database::commit();
             Flash::success('Registration successful! Please login.');
-            return ['success' => true, 'redirect' => '/webfinal/auth/login.php'];
+            return ['success' => true, 'redirect' => '/web 2 final/Web2/auth/login.php'];
         } catch (Exception $e) {
             Database::rollBack();
             return ['success' => false, 'errors' => ['Registration failed. Please try again.']];
@@ -98,8 +98,8 @@ class AuthService
         Auth::login((int) $user['user_id'], $user['full_name'], $user['role_name']);
 
         return ['success' => true, 'redirect' => Auth::isAdmin()
-            ? '/webfinal/admin/dashboard.php'
-            : '/webfinal/user/facilities.php'
+            ? '/web 2 final/Web2/admin/dashboard.php'
+            : '/web 2 final/Web2/user/facilities.php'
         ];
     }
 }

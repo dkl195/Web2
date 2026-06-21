@@ -7,7 +7,7 @@ require_once __DIR__ . '/../includes/auth.php';
 requireAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /webfinal/admin/bookings.php');
+    header('Location: /web 2 final/Web2/admin/bookings.php');
     exit;
 }
 
@@ -26,5 +26,5 @@ if ($action === 'approve') {
 }
 
 Flash::set($result['success'] ? 'success' : 'error', $result['message']);
-header('Location: /webfinal/admin/booking_detail.php?id=' . $bookingId);
+header('Location: /web 2 final/Web2/admin/booking_detail.php?id=' . $bookingId);
 exit;
