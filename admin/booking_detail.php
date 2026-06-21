@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/../includes/auth.php';
 requireAdmin();
 
@@ -8,7 +8,7 @@ $b = $bookingService->getBookingDetail($id);
 if (!$b) { header('Location: /webfinal/admin/bookings.php'); exit; }
 
 $pageTitle = 'Booking ' . $b['booking_code'];
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/admin_header.php';
 $flash = getFlash();
 if ($flash) {
     echo '<div class="alert alert-' . ($flash['type'] === 'success' ? 'success' : 'error') . '">' . e($flash['message']) . '</div>';
@@ -51,4 +51,5 @@ if ($flash) {
     <?php endif; ?>
 </div>
 
-<?php require_once __DIR__ . '/../includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../includes/admin_footer.php'; ?>
+

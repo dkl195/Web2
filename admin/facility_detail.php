@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/../includes/auth.php';
 requireAdmin();
 
@@ -8,7 +8,7 @@ $f = $facilityService->getFacilityWithRule($id);
 if (!$f) { header('Location: /webfinal/admin/facilities.php'); exit; }
 
 $pageTitle = e($f['facility_name']) . ' - Facility Detail';
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/admin_header.php';
 ?>
 
 <div class="card">
@@ -31,4 +31,5 @@ require_once __DIR__ . '/../includes/header.php';
     </ul>
 </div>
 
-<?php require_once __DIR__ . '/../includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../includes/admin_footer.php'; ?>
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/../includes/auth.php';
 requireAdmin();
 
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $rules = $facilityService->getAllRules();
 
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/admin_header.php';
 $flash = getFlash();
 if ($flash) echo '<div class="alert alert-success">' . e($flash['message']) . '</div>';
 ?>
@@ -51,4 +51,5 @@ if ($flash) echo '<div class="alert alert-success">' . e($flash['message']) . '<
     </div>
 </div>
 
-<?php require_once __DIR__ . '/../includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../includes/admin_footer.php'; ?>
+
