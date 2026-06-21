@@ -1096,3 +1096,26 @@ table tbody tr:hover td { background: var(--cream); }
     .detail-list li { flex-direction: column; gap: 0.2rem; }
     .facility-grid { grid-template-columns: 1fr; }
 }
+
+/* ══════════════════════════════════════
+   HERO RIGHT IMAGE
+══════════════════════════════════════ */
+.hero-image-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image-right img {
+    width: 100%;
+    max-width: 520px;
+    height: 360px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 900px) {
+    .hero-image-right { display: none; }
+}

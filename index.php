@@ -34,23 +34,8 @@ if ($flash) {
                 <?php endif; ?>
             </div>
         </div>
-        <div class="hero-panel">
-            <div class="hero-stat">
-                <div class="hero-stat-number">4+</div>
-                <div class="hero-stat-label">Loại cơ sở</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-number">24/7</div>
-                <div class="hero-stat-label">Hỗ trợ online</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-number">Fast</div>
-                <div class="hero-stat-label">Xác nhận nhanh</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-number">Free</div>
-                <div class="hero-stat-label">Miễn phí sử dụng</div>
-            </div>
+        <div class="hero-image-right">
+            <img src="/web2/Web2/assets/images/hero-right.jpg" alt="Campus Booking">
         </div>
     </div>
 </div>
