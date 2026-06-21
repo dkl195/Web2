@@ -13,7 +13,7 @@ class FacilityModel extends BaseModel
     }
 
     /** User chỉ thấy facility available */
-    public function findAvailable(?int $categoryId = null): array
+    public function findAvailable(?int $categoryId = null, ?string $keyword = null): array
     {
         $sql = "
             SELECT f.*, c.category_name
@@ -22,10 +22,27 @@ class FacilityModel extends BaseModel
             WHERE f.facility_status = 'available'
         ";
         $params = [];
+
         if ($categoryId) {
             $sql .= " AND f.category_id = ?";
             $params[] = $categoryId;
         }
+
+        $keyword = trim((string) $keyword);
+        if ($keyword !== '') {
+            $sql .= " AND (
+                f.facility_name LIKE ?
+                OR f.location LIKE ?
+                OR f.description LIKE ?
+                OR c.category_name LIKE ?
+            )";
+            $search = '%' . $keyword . '%';
+            $params[] = $search;
+            $params[] = $search;
+            $params[] = $search;
+            $params[] = $search;
+        }
+
         $sql .= " ORDER BY c.category_name, f.facility_name";
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
