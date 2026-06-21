@@ -1,19 +1,24 @@
 <?php
 /**
- * =============================================================================
  * BOOTSTRAP - File khởi tạo backend
- * =============================================================================
- * Mọi trang PHP đều require file này (qua includes/auth.php).
- *
- * Kiến trúc 3 tầng:
- *   1. MODEL    → Chỉ làm việc với database (SELECT, INSERT, UPDATE, DELETE)
- *   2. SERVICE  → Business logic (validate, transaction, quy tắc nghiệp vụ)
- *   3. VIEW     → Các file auth/*.php, user/*.php, admin/*.php (chỉ hiển thị UI)
- *
- * Luồng xử lý request:
- *   User bấm Submit → View nhận $_POST → gọi Service → Service gọi Model → trả kết quả
- * =============================================================================
  */
+
+// Đảm bảo output UTF-8
+if (!headers_sent()) {
+    header('Content-Type: text/html; charset=UTF-8');
+}
+mb_internal_encoding('UTF-8');
+
+// --- BASE_URL: detect từ SCRIPT_NAME, encode dấu cách ---
+if (!defined('BASE_URL')) {
+    $sn = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+    if (preg_match('#^(.*?/Web2)(/|$)#i', $sn, $m)) {
+        // Encode dấu cách thành %20 để dùng được trong href
+        define('BASE_URL', str_replace(' ', '%20', $m[1]));
+    } else {
+        define('BASE_URL', '/web%202%20final/Web2');
+    }
+}
 
 require_once __DIR__ . '/../config/database.php';
 

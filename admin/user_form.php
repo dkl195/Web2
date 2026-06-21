@@ -12,7 +12,7 @@ $user = ['full_name' => '', 'email' => '', 'role_id' => 2, 'account_status' => '
 
 if ($isEdit) {
     $user = $userService->getUserWithProfile($userId);
-    if (!$user) { header('Location: /webfinal/admin/users.php'); exit; }
+    if (!$user) { header('Location: /web 2 final/Web2/admin/users.php'); exit; }
 }
 
 $roles = $roleModel->findAll();
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result['success']) {
         Flash::success($result['message']);
-        header('Location: /webfinal/admin/users.php');
+        header('Location: /web 2 final/Web2/admin/users.php');
         exit;
     }
     $errors = $result['errors'] ?? [$result['message'] ?? 'Error'];
@@ -44,7 +44,7 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="card">
     <div class="card-header">
         <h2><?= $isEdit ? 'Edit User' : 'Add User' ?></h2>
-        <a href="/webfinal/admin/users.php" class="btn btn-secondary btn-sm">Back</a>
+        <a href="/web 2 final/Web2/admin/users.php" class="btn btn-secondary btn-sm">Back</a>
     </div>
     <?php foreach ($errors as $err): ?><div class="alert alert-error"><?= e($err) ?></div><?php endforeach; ?>
     <form method="POST">

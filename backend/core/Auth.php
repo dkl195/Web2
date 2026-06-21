@@ -58,7 +58,7 @@ class Auth
     public static function requireLogin(): void
     {
         if (!self::isLoggedIn()) {
-            header('Location: /webfinal/auth/login.php');
+            header('Location: /web 2 final/Web2/auth/login.php');
             exit;
         }
     }
@@ -67,7 +67,7 @@ class Auth
     {
         self::requireLogin();
         if (!self::isAdmin()) {
-            header('Location: /webfinal/index.php?error=access_denied');
+            header('Location: /web 2 final/Web2/index.php?error=access_denied');
             exit;
         }
     }
@@ -76,9 +76,9 @@ class Auth
     public static function redirectByRole(): void
     {
         if (self::isAdmin()) {
-            header('Location: /webfinal/admin/dashboard.php');
+            header('Location: /web 2 final/Web2/admin/dashboard.php');
         } else {
-            header('Location: /webfinal/user/facilities.php');
+            header('Location: /web 2 final/Web2/user/facilities.php');
         }
         exit;
     }

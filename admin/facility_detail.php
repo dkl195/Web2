@@ -5,7 +5,7 @@ requireAdmin();
 $id = (int) ($_GET['id'] ?? 0);
 $facilityService = new FacilityService();
 $f = $facilityService->getFacilityWithRule($id);
-if (!$f) { header('Location: /webfinal/admin/facilities.php'); exit; }
+if (!$f) { header('Location: /web 2 final/Web2/admin/facilities.php'); exit; }
 
 $pageTitle = e($f['facility_name']) . ' - Facility Detail';
 require_once __DIR__ . '/../includes/header.php';
@@ -15,8 +15,8 @@ require_once __DIR__ . '/../includes/header.php';
     <div class="card-header">
         <h2><?= e($f['facility_name']) ?></h2>
         <div style="display:flex;gap:0.5rem;">
-            <a href="/webfinal/admin/facility_form.php?id=<?= $id ?>" class="btn btn-primary btn-sm">Edit</a>
-            <a href="/webfinal/admin/facilities.php" class="btn btn-secondary btn-sm">Back</a>
+            <a href="/web 2 final/Web2/admin/facility_form.php?id=<?= $id ?>" class="btn btn-primary btn-sm">Edit</a>
+            <a href="/web 2 final/Web2/admin/facilities.php" class="btn btn-secondary btn-sm">Back</a>
         </div>
     </div>
     <ul class="detail-list">

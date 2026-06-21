@@ -6,7 +6,7 @@ $facilityService = new FacilityService();
 $f = $facilityService->getAvailableFacility($id);
 
 if (!$f) {
-    header('Location: /webfinal/user/facilities.php');
+    header('Location: /web 2 final/Web2/user/facilities.php');
     exit;
 }
 
@@ -17,7 +17,7 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="card">
     <div class="card-header">
         <h2><?= e($f['facility_name']) ?></h2>
-        <a href="/webfinal/user/facilities.php" class="btn btn-secondary btn-sm">Back</a>
+        <a href="/web 2 final/Web2/user/facilities.php" class="btn btn-secondary btn-sm">Back</a>
     </div>
     <ul class="detail-list">
         <li><span class="label">Category</span><span class="value"><?= e($f['category_name']) ?></span></li>
@@ -30,9 +30,9 @@ require_once __DIR__ . '/../includes/header.php';
     </ul>
     <div style="margin-top:1.5rem;">
         <?php if (isLoggedIn() && !isAdmin()): ?>
-            <a href="/webfinal/user/booking_form.php?facility_id=<?= $id ?>" class="btn btn-primary">Book Now</a>
+            <a href="/web 2 final/Web2/user/booking_form.php?facility_id=<?= $id ?>" class="btn btn-primary">Book Now</a>
         <?php elseif (!isLoggedIn()): ?>
-            <a href="/webfinal/auth/login.php" class="btn btn-primary">Login to Book</a>
+            <a href="/web 2 final/Web2/auth/login.php" class="btn btn-primary">Login to Book</a>
         <?php endif; ?>
     </div>
 </div>

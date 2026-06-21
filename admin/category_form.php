@@ -10,7 +10,7 @@ $cat = ['category_name' => '', 'description' => ''];
 
 if ($id) {
     $row = (new FacilityCategoryModel())->findById($id);
-    if (!$row) { header('Location: /webfinal/admin/categories.php'); exit; }
+    if (!$row) { header('Location: /web 2 final/Web2/admin/categories.php'); exit; }
     $cat = $row;
 }
 
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $facilityService->saveCategory($id ?: null, $name, $desc);
     if ($result['success']) {
         Flash::success($id ? 'Category updated.' : 'Category created.');
-        header('Location: /webfinal/admin/categories.php');
+        header('Location: /web 2 final/Web2/admin/categories.php');
         exit;
     }
     $errors = $result['errors'] ?? ['Error'];
@@ -33,7 +33,7 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="card">
     <div class="card-header">
         <h2><?= $id ? 'Edit Category' : 'Add Category' ?></h2>
-        <a href="/webfinal/admin/categories.php" class="btn btn-secondary btn-sm">Back</a>
+        <a href="/web 2 final/Web2/admin/categories.php" class="btn btn-secondary btn-sm">Back</a>
     </div>
     <?php foreach ($errors as $err): ?><div class="alert alert-error"><?= e($err) ?></div><?php endforeach; ?>
     <form method="POST">

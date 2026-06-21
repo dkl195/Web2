@@ -5,7 +5,7 @@ requireAdmin();
 $id = (int) ($_GET['id'] ?? 0);
 $bookingService = new BookingService();
 $b = $bookingService->getBookingDetail($id);
-if (!$b) { header('Location: /webfinal/admin/bookings.php'); exit; }
+if (!$b) { header('Location: /web 2 final/Web2/admin/bookings.php'); exit; }
 
 $pageTitle = 'Booking ' . $b['booking_code'];
 require_once __DIR__ . '/../includes/header.php';
@@ -18,7 +18,7 @@ if ($flash) {
 <div class="card">
     <div class="card-header">
         <h2>Booking Detail: <?= e($b['booking_code']) ?></h2>
-        <a href="/webfinal/admin/bookings.php" class="btn btn-secondary btn-sm">Back</a>
+        <a href="/web 2 final/Web2/admin/bookings.php" class="btn btn-secondary btn-sm">Back</a>
     </div>
     <ul class="detail-list">
         <li><span class="label">Status</span><span class="value"><span class="badge <?= statusBadgeClass($b['status_code']) ?>"><?= e($b['status_name']) ?></span></span></li>
@@ -36,12 +36,12 @@ if ($flash) {
     </ul>
     <?php if ($b['status_code'] === 'PENDING'): ?>
         <div class="form-actions" style="margin-top:1.5rem;">
-            <form method="POST" action="/webfinal/admin/update_booking_status.php" style="display:inline;">
+            <form method="POST" action="/web 2 final/Web2/admin/update_booking_status.php" style="display:inline;">
                 <input type="hidden" name="booking_id" value="<?= $id ?>">
                 <input type="hidden" name="action" value="approve">
                 <button type="submit" class="btn btn-success">Approve</button>
             </form>
-            <form method="POST" action="/webfinal/admin/update_booking_status.php" style="display:inline-flex;gap:0.5rem;align-items:flex-end;">
+            <form method="POST" action="/web 2 final/Web2/admin/update_booking_status.php" style="display:inline-flex;gap:0.5rem;align-items:flex-end;">
                 <input type="hidden" name="booking_id" value="<?= $id ?>">
                 <input type="hidden" name="action" value="reject">
                 <input type="text" name="admin_note" class="form-control" placeholder="Rejection reason..." required style="min-width:250px;">

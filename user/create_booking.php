@@ -7,12 +7,12 @@ require_once __DIR__ . '/../includes/auth.php';
 requireLogin();
 
 if (isAdmin()) {
-    header('Location: /webfinal/admin/dashboard.php');
+    header('Location: /web 2 final/Web2/admin/dashboard.php');
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /webfinal/user/facilities.php');
+    header('Location: /web 2 final/Web2/user/facilities.php');
     exit;
 }
 
@@ -30,11 +30,11 @@ $result = $bookingService->createBooking(Auth::userId(), $data);
 
 if ($result['success']) {
     Flash::success($result['message']);
-    header('Location: /webfinal/user/my_bookings.php');
+    header('Location: /web 2 final/Web2/user/my_bookings.php');
     exit;
 }
 
 $_SESSION['booking_errors'] = $result['errors'] ?? ['Unknown error'];
 $_SESSION['booking_old'] = $data;
-header('Location: /webfinal/user/booking_form.php?facility_id=' . $data['facility_id']);
+header('Location: /web 2 final/Web2/user/booking_form.php?facility_id=' . $data['facility_id']);
 exit;

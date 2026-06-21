@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (PDOException $e) {
         Flash::error('Role name already exists.');
     }
-    header('Location: /webfinal/admin/roles.php');
+    header('Location: /web 2 final/Web2/admin/roles.php');
     exit;
 }
 
@@ -30,7 +30,7 @@ if (isset($_GET['delete'])) {
     } else {
         Flash::error('Cannot delete role assigned to users.');
     }
-    header('Location: /webfinal/admin/roles.php');
+    header('Location: /web 2 final/Web2/admin/roles.php');
     exit;
 }
 

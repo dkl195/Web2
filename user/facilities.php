@@ -53,7 +53,7 @@ require_once __DIR__ . '/../includes/header.php';
                 </div>
                 <div class="facility-card-footer">
                     <span class="availability-dot">Available</span>
-                    <a href="/webfinal/user/facility_detail.php?id=<?= $f['facility_id'] ?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
+                    <a href="/web 2 final/Web2/user/facility_detail.php?id=<?= $f['facility_id'] ?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
                 </div>
             </div>
         <?php endforeach; ?>

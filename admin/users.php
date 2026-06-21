@@ -11,14 +11,14 @@ if (isset($_GET['deactivate'])) {
         $userService->deactivate($id);
         Flash::success('User deactivated successfully.');
     }
-    header('Location: /webfinal/admin/users.php');
+    header('Location: /web 2 final/Web2/admin/users.php');
     exit;
 }
 
 if (isset($_GET['activate'])) {
     $userService->activate((int) $_GET['activate']);
     Flash::success('User activated successfully.');
-    header('Location: /webfinal/admin/users.php');
+    header('Location: /web 2 final/Web2/admin/users.php');
     exit;
 }
 
@@ -28,7 +28,7 @@ if (isset($_GET['delete'])) {
         $result = $userService->deleteUser($id);
         Flash::set($result['success'] ? 'success' : 'error', $result['message']);
     }
-    header('Location: /webfinal/admin/users.php');
+    header('Location: /web 2 final/Web2/admin/users.php');
     exit;
 }
 
@@ -44,7 +44,7 @@ if ($flash) {
 <div class="card">
     <div class="card-header">
         <h2>Manage Users</h2>
-        <a href="/webfinal/admin/user_form.php" class="btn btn-primary btn-sm">+ Add User</a>
+        <a href="/web 2 final/Web2/admin/user_form.php" class="btn btn-primary btn-sm">+ Add User</a>
     </div>
     <div class="table-responsive">
         <table>
@@ -64,7 +64,7 @@ if ($flash) {
                     <td><?= e($u['student_code'] ?? '-') ?></td>
                     <td><span class="badge badge-<?= $u['account_status'] ?>"><?= e($u['account_status']) ?></span></td>
                     <td>
-                        <a href="/webfinal/admin/user_form.php?id=<?= $u['user_id'] ?>" class="btn btn-secondary btn-sm">Edit</a>
+                        <a href="/web 2 final/Web2/admin/user_form.php?id=<?= $u['user_id'] ?>" class="btn btn-secondary btn-sm">Edit</a>
                         <?php if ($u['user_id'] !== Auth::userId()): ?>
                             <?php if ($u['account_status'] === 'active'): ?>
                                 <a href="?deactivate=<?= $u['user_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Deactivate?')">Deactivate</a>

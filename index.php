@@ -1,10 +1,11 @@
 <?php
 $pageTitle = 'Trang chủ - VNU-IS Booking';
+$baseUrl = '/web 2 final/Web2';
 require_once __DIR__ . '/includes/header.php';
 
 $flash = getFlash();
 if (isset($_GET['error']) && $_GET['error'] === 'access_denied') {
-    echo '<div class="alert alert-error" style="max-width:1280px;margin:1rem auto;padding:0 2rem;">Access denied. Admin privileges required.</div>';
+    echo '<div class="alert alert-error" style="max-width:1280px;margin:1rem auto;padding:0 2rem;">⛔ Access denied. Admin privileges required.</div>';
 }
 if ($flash) {
     echo '<div class="alert alert-' . ($flash['type'] === 'success' ? 'success' : 'error') . '" style="max-width:1280px;margin:1rem auto;padding:0 2rem;">' . e($flash['message']) . '</div>';
@@ -23,14 +24,14 @@ if ($flash) {
             <div class="hero-actions">
                 <?php if (isLoggedIn()): ?>
                     <?php if (isAdmin()): ?>
-                        <a href="/webfinal/admin/dashboard.php" class="btn btn-yellow">Dashboard</a>
+                        <a href="<?= $baseUrl ?>/admin/dashboard.php" class="btn btn-accent">📊 Dashboard</a>
                     <?php else: ?>
-                        <a href="/webfinal/user/facilities.php" class="btn btn-yellow">Xem Facilities</a>
-                        <a href="/webfinal/user/my_bookings.php" class="btn btn-ghost">My Bookings</a>
+                        <a href="<?= $baseUrl ?>/user/facilities.php" class="btn btn-accent">🏛️ Xem Facilities</a>
+                        <a href="<?= $baseUrl ?>/user/my_bookings.php" class="btn btn-ghost">📅 My Bookings</a>
                     <?php endif; ?>
                 <?php else: ?>
-                    <a href="/webfinal/auth/login.php" class="btn btn-yellow">Đăng nhập</a>
-                    <a href="/webfinal/auth/register.php" class="btn btn-ghost">Đăng ký</a>
+                    <a href="<?= $baseUrl ?>/auth/login.php" class="btn btn-accent">Đăng nhập</a>
+                    <a href="<?= $baseUrl ?>/auth/register.php" class="btn btn-ghost">Đăng ký miễn phí</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -62,9 +63,9 @@ if ($flash) {
         <h2 class="category-heading">Chọn loại cơ sở</h2>
         <p class="category-sub">Tìm và đặt không gian phù hợp với nhu cầu học tập, nghiên cứu hoặc thể thao của bạn.</p>
         <div class="card-grid">
-            <a href="/webfinal/user/facilities.php?category=2" class="feature-card">
+            <a href="<?= $baseUrl ?>/user/facilities.php?category=2" class="feature-card">
                 <div class="feature-card-img">
-                    <img src="/webfinal/assets/images/lab.jpg" alt="Phòng học & Lab" onerror="this.style.display='none'">
+                    <img src="<?= $baseUrl ?>/assets/images/lab.jpg" alt="Phòng học & Lab" onerror="this.style.display='none'">
                     <div class="feature-card-overlay">
                         <div class="icon">LAB</div>
                     </div>
@@ -75,9 +76,9 @@ if ($flash) {
                     <span class="card-arrow">Xem ngay →</span>
                 </div>
             </a>
-            <a href="/webfinal/user/facilities.php?category=3" class="feature-card">
+            <a href="<?= $baseUrl ?>/user/facilities.php?category=3" class="feature-card">
                 <div class="feature-card-img">
-                    <img src="/webfinal/assets/images/sports.jpg" alt="Sân thể thao" onerror="this.style.display='none'">
+                    <img src="<?= $baseUrl ?>/assets/images/sports.jpg" alt="Sân thể thao" onerror="this.style.display='none'">
                     <div class="feature-card-overlay">
                         <div class="icon">SPT</div>
                     </div>
@@ -88,9 +89,9 @@ if ($flash) {
                     <span class="card-arrow">Xem ngay →</span>
                 </div>
             </a>
-            <a href="/webfinal/user/facilities.php?category=4" class="feature-card">
+            <a href="<?= $baseUrl ?>/user/facilities.php?category=4" class="feature-card">
                 <div class="feature-card-img">
-                    <img src="/webfinal/assets/images/meeting.jpg" alt="Phòng họp" onerror="this.style.display='none'">
+                    <img src="<?= $baseUrl ?>/assets/images/meeting.jpg" alt="Phòng họp" onerror="this.style.display='none'">
                     <div class="feature-card-overlay">
                         <div class="icon">MTG</div>
                     </div>
@@ -101,6 +102,32 @@ if ($flash) {
                     <span class="card-arrow">Xem ngay →</span>
                 </div>
             </a>
+        </div>
+    </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div style="padding:5rem 2.5rem; background:var(--bg);">
+    <div style="max-width:1280px;margin:0 auto;">
+        <div class="section-tag">Quy trình</div>
+        <h2 class="category-heading">Đặt chỗ chỉ 3 bước</h2>
+        <p class="category-sub">Nhanh chóng và đơn giản.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2.5rem;">
+            <div style="text-align:center;padding:2rem;">
+                <div style="width:56px;height:56px;border-radius:50%;background:var(--blue-soft);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;">🔍</div>
+                <h3 style="font-size:1rem;font-weight:700;margin-bottom:0.5rem;color:var(--text);">1. Tìm cơ sở</h3>
+                <p style="font-size:0.83rem;color:var(--text-muted);line-height:1.7;">Duyệt qua danh sách phòng, lab và sân thể thao trong campus.</p>
+            </div>
+            <div style="text-align:center;padding:2rem;">
+                <div style="width:56px;height:56px;border-radius:50%;background:var(--blue-soft);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;">📅</div>
+                <h3 style="font-size:1rem;font-weight:700;margin-bottom:0.5rem;color:var(--text);">2. Chọn thời gian</h3>
+                <p style="font-size:0.83rem;color:var(--text-muted);line-height:1.7;">Chọn ngày và giờ phù hợp với lịch của bạn.</p>
+            </div>
+            <div style="text-align:center;padding:2rem;">
+                <div style="width:56px;height:56px;border-radius:50%;background:var(--blue-soft);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;">✅</div>
+                <h3 style="font-size:1rem;font-weight:700;margin-bottom:0.5rem;color:var(--text);">3. Xác nhận</h3>
+                <p style="font-size:0.83rem;color:var(--text-muted);line-height:1.7;">Gửi yêu cầu và nhận xác nhận từ admin nhanh chóng.</p>
+            </div>
         </div>
     </div>
 </div>
