@@ -4,8 +4,9 @@ require_once __DIR__ . '/../includes/auth.php';
 $pageTitle = 'Facilities - Campus Booking';
 $facilityService = new FacilityService();
 $categoryFilter = isset($_GET['category']) ? (int) $_GET['category'] : 0;
+$keyword = trim($_GET['q'] ?? '');
 
-$facilities = $facilityService->getAvailableFacilities($categoryFilter ?: null);
+$facilities = $facilityService->getAvailableFacilities($categoryFilter ?: null, $keyword ?: null);
 $categories = $facilityService->getCategoriesSimple();
 
 require_once __DIR__ . '/../includes/header.php';
@@ -24,6 +25,13 @@ require_once __DIR__ . '/../includes/header.php';
             <?php endforeach; ?>
         </select>
     </div>
+    <div class="form-group">
+        <label>Tìm kiếm</label>
+        <input type="text" name="q" class="form-control" value="<?= e($keyword) ?>" placeholder="Tìm phòng, lab, sân...">
+    </div>
+    <div class="form-group" style="align-self:flex-end;">
+        <button type="submit" class="btn btn-secondary">Search</button>
+    </div>
 </form>
 
 <?php if (empty($facilities)): ?>
@@ -41,13 +49,13 @@ require_once __DIR__ . '/../includes/header.php';
                     <h3><?= e($f['facility_name']) ?></h3>
                     <div class="meta">
                         <div class="meta-item">
-                            <i class="meta-icon">📍</i><?= e($f['location']) ?>
+                            <i class="meta-icon">LOC</i><?= e($f['location']) ?>
                         </div>
                         <div class="meta-item">
-                            <i class="meta-icon">👥</i>Capacity: <?= $f['capacity'] ?> người
+                            <i class="meta-icon">CAP</i>Capacity: <?= $f['capacity'] ?> người
                         </div>
                         <div class="meta-item">
-                            <i class="meta-icon">🕐</i><?= formatTime($f['open_time']) ?> – <?= formatTime($f['close_time']) ?>
+                            <i class="meta-icon">TIME</i><?= formatTime($f['open_time']) ?> – <?= formatTime($f['close_time']) ?>
                         </div>
                     </div>
                 </div>
