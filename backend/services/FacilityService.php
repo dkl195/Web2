@@ -69,9 +69,9 @@ class FacilityService
         return $this->facilityModel->findAllWithCategory();
     }
 
-    public function getAvailableFacilities(?int $categoryId = null): array
+    public function getAvailableFacilities(?int $categoryId = null, ?string $keyword = null): array
     {
-        return $this->facilityModel->findAvailable($categoryId);
+        return $this->facilityModel->findAvailable($categoryId, $keyword);
     }
 
     public function getFacilityWithRule(int $id): ?array
