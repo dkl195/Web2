@@ -35,7 +35,7 @@ if ($flash) {
             </div>
         </div>
         <div class="hero-image-right">
-            <img src="/web2/Web2/assets/images/hero-right.jpg" alt="Campus Booking">
+            <img src="/web2/Web2/assets/images/hero-right.png" alt="Campus Booking">
         </div>
     </div>
 </div>
