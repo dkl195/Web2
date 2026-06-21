@@ -2,6 +2,11 @@
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/functions.php';
 
+if (isLoggedIn() && !array_key_exists('avatar', $_SESSION)) {
+    $profileUser = (new UserService())->getUserWithProfile((int) $_SESSION['user_id']);
+    Auth::setAvatar($profileUser['avatar'] ?? null);
+}
+
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 $baseUrl = '/webfinal';
 ?>
@@ -46,7 +51,10 @@ $baseUrl = '/webfinal';
                     <li><a href="<?= $baseUrl ?>/user/my_bookings.php" class="<?= $currentPage === 'my_bookings' ? 'active' : '' ?>">My Bookings</a></li>
                     <li><a href="<?= $baseUrl ?>/user/profile.php" class="<?= $currentPage === 'profile' ? 'active' : '' ?>">Profile</a></li>
                 <?php endif; ?>
-                <li><span class="navbar-user"><?= e($_SESSION['full_name'] ?? '') ?></span></li>
+                <li class="navbar-user-wrap">
+                    <img src="<?= e(currentAvatarUrl()) ?>" alt="" class="navbar-avatar">
+                    <span class="navbar-user"><?= e($_SESSION['full_name'] ?? '') ?></span>
+                </li>
                 <li><a href="<?= $baseUrl ?>/auth/logout.php" class="nav-logout">Logout</a></li>
             <?php else: ?>
                 <li><a href="<?= $baseUrl ?>/auth/login.php">Login</a></li>

@@ -20,9 +20,10 @@ class UserModel extends BaseModel
     public function findByEmailWithRole(string $email): ?array
     {
         $stmt = $this->db->prepare("
-            SELECT u.*, r.role_name
+            SELECT u.*, r.role_name, up.avatar
             FROM users u
             INNER JOIN roles r ON u.role_id = r.role_id
+            LEFT JOIN user_profiles up ON u.user_id = up.user_id
             WHERE u.email = ?
         ");
         $stmt->execute([$email]);
@@ -32,7 +33,7 @@ class UserModel extends BaseModel
     public function findAllWithProfile(): array
     {
         return $this->db->query("
-            SELECT u.*, r.role_name, up.student_code, up.faculty, up.class_name
+            SELECT u.*, r.role_name, up.student_code, up.faculty, up.class_name, up.avatar
             FROM users u
             INNER JOIN roles r ON u.role_id = r.role_id
             LEFT JOIN user_profiles up ON u.user_id = up.user_id
@@ -43,7 +44,7 @@ class UserModel extends BaseModel
     public function findWithProfile(int $userId): ?array
     {
         $stmt = $this->db->prepare("
-            SELECT u.*, r.role_name, up.profile_id, up.student_code, up.faculty, up.class_name
+            SELECT u.*, r.role_name, up.profile_id, up.student_code, up.faculty, up.class_name, up.avatar
             FROM users u
             INNER JOIN roles r ON u.role_id = r.role_id
             LEFT JOIN user_profiles up ON u.user_id = up.user_id

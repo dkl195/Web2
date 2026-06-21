@@ -28,3 +28,16 @@ function statusBadgeClass(string $code): string
         default => 'badge-default',
     };
 }
+
+function avatarUrl(?string $path): string
+{
+    if ($path) {
+        return '/webfinal/' . ltrim($path, '/');
+    }
+    return '/webfinal/assets/images/default-avatar.svg';
+}
+
+function currentAvatarUrl(): string
+{
+    return avatarUrl($_SESSION['avatar'] ?? null);
+}

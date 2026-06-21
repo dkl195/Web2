@@ -30,13 +30,82 @@ class UserService
     }
 
     /** User cập nhật profile của chính mình */
-    public function updateOwnProfile(int $userId, array $data): bool
+    public function updateOwnProfile(int $userId, array $data, ?array $avatarFile = null): array
     {
         $profile = $this->profileModel->findByUserId($userId);
         if ($profile) {
-            return $this->profileModel->update($userId, $data['student_code'], $data['faculty'], $data['class_name']);
+            $this->profileModel->update($userId, $data['student_code'], $data['faculty'], $data['class_name']);
+        } else {
+            $this->profileModel->create($userId, $data['student_code'], $data['faculty'], $data['class_name']);
         }
-        return $this->profileModel->create($userId, $data['student_code'], $data['faculty'], $data['class_name']);
+
+        if ($avatarFile !== null && ($avatarFile['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
+            $avatarResult = $this->handleAvatarUpload($userId, $avatarFile);
+            if (!$avatarResult['success']) {
+                return $avatarResult;
+            }
+        }
+
+        return ['success' => true, 'message' => 'Profile updated successfully.'];
+    }
+
+    private function handleAvatarUpload(int $userId, array $file): array
+    {
+        if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+            return ['success' => false, 'errors' => ['Failed to upload avatar. Please try again.']];
+        }
+
+        if (($file['size'] ?? 0) > 2 * 1024 * 1024) {
+            return ['success' => false, 'errors' => ['Avatar must be smaller than 2MB.']];
+        }
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+
+        $allowed = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/webp' => 'webp',
+        ];
+
+        if (!isset($allowed[$mime])) {
+            return ['success' => false, 'errors' => ['Avatar must be JPG, PNG, or WEBP.']];
+        }
+
+        $uploadDir = dirname(__DIR__, 2) . '/uploads/avatars';
+        if (!is_dir($uploadDir) && !mkdir($uploadDir, 0755, true)) {
+            return ['success' => false, 'errors' => ['Unable to prepare upload folder.']];
+        }
+
+        $filename = 'user_' . $userId . '_' . bin2hex(random_bytes(8)) . '.' . $allowed[$mime];
+        $destination = $uploadDir . '/' . $filename;
+
+        if (!move_uploaded_file($file['tmp_name'], $destination)) {
+            return ['success' => false, 'errors' => ['Failed to save avatar.']];
+        }
+
+        $profile = $this->profileModel->findByUserId($userId);
+        $oldAvatar = $profile['avatar'] ?? null;
+
+        $relativePath = 'uploads/avatars/' . $filename;
+        $this->profileModel->updateAvatar($userId, $relativePath);
+        $this->deleteAvatarFile($oldAvatar);
+        Auth::setAvatar($relativePath);
+
+        return ['success' => true];
+    }
+
+    private function deleteAvatarFile(?string $path): void
+    {
+        if (!$path) {
+            return;
+        }
+
+        $fullPath = dirname(__DIR__, 2) . '/' . ltrim($path, '/');
+        if (is_file($fullPath)) {
+            unlink($fullPath);
+        }
     }
 
     /** Admin tạo / sửa user */

@@ -6,16 +6,23 @@ $pageTitle = 'Hồ sơ cá nhân - Campus Booking';
 $userService = new UserService();
 $userId = Auth::userId();
 $success = '';
+$errors = [];
 
 $user = $userService->getUserWithProfile($userId);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $userService->updateOwnProfile($userId, [
+    $result = $userService->updateOwnProfile($userId, [
         'student_code' => trim($_POST['student_code'] ?? ''),
         'faculty' => trim($_POST['faculty'] ?? ''),
         'class_name' => trim($_POST['class_name'] ?? ''),
-    ]);
-    $success = 'Profile updated successfully.';
+    ], $_FILES['avatar'] ?? null);
+
+    if ($result['success']) {
+        $success = $result['message'];
+    } else {
+        $errors = $result['errors'] ?? ['Unable to update profile.'];
+    }
+
     $user = $userService->getUserWithProfile($userId);
 }
 
@@ -33,16 +40,33 @@ require_once __DIR__ . '/../includes/header.php';
     <?php if ($success): ?>
         <div class="alert alert-success"><?= e($success) ?></div>
     <?php endif; ?>
+    <?php if (!empty($errors)): ?>
+        <div class="alert alert-error">
+            <?php foreach ($errors as $error): ?>
+                <div><?= e($error) ?></div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
-    <ul class="detail-list mb-lg">
-        <li><span class="label">Họ tên</span><span class="value"><?= e($user['full_name']) ?></span></li>
-        <li><span class="label">Email</span><span class="value"><?= e($user['email']) ?></span></li>
-        <li><span class="label">Role</span><span class="value"><?= e(Auth::roleName()) ?></span></li>
-        <li><span class="label">Trạng thái</span><span class="value"><span class="badge badge-<?= $user['account_status'] ?>"><?= e($user['account_status']) ?></span></span></li>
-    </ul>
+    <div class="profile-top">
+        <div class="profile-avatar-wrap">
+            <img src="<?= e(avatarUrl($user['avatar'] ?? null)) ?>" alt="Avatar" class="profile-avatar">
+        </div>
+        <ul class="detail-list profile-detail-list">
+            <li><span class="label">Họ tên</span><span class="value"><?= e($user['full_name']) ?></span></li>
+            <li><span class="label">Email</span><span class="value"><?= e($user['email']) ?></span></li>
+            <li><span class="label">Role</span><span class="value"><?= e(Auth::roleName()) ?></span></li>
+            <li><span class="label">Trạng thái</span><span class="value"><span class="badge badge-<?= $user['account_status'] ?>"><?= e($user['account_status']) ?></span></span></li>
+        </ul>
+    </div>
 
     <h3 class="section-label">Cập nhật thông tin</h3>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="avatar">Ảnh đại diện</label>
+            <input type="file" id="avatar" name="avatar" class="form-control" accept="image/jpeg,image/png,image/webp">
+            <small class="form-hint">JPG, PNG hoặc WEBP. Tối đa 2MB.</small>
+        </div>
         <div class="form-group">
             <label for="student_code">Mã sinh viên</label>
             <input type="text" id="student_code" name="student_code" class="form-control" value="<?= e($user['student_code'] ?? '') ?>">

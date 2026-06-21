@@ -95,7 +95,12 @@ class AuthService
         }
 
         // Tạo session
-        Auth::login((int) $user['user_id'], $user['full_name'], $user['role_name']);
+        Auth::login(
+            (int) $user['user_id'],
+            $user['full_name'],
+            $user['role_name'],
+            $user['avatar'] ?? null
+        );
 
         return ['success' => true, 'redirect' => Auth::isAdmin()
             ? '/webfinal/admin/dashboard.php'

@@ -41,11 +41,17 @@ class Auth
     }
 
     /** Tạo session sau khi login thành công */
-    public static function login(int $userId, string $fullName, string $roleName): void
+    public static function login(int $userId, string $fullName, string $roleName, ?string $avatar = null): void
     {
         $_SESSION['user_id'] = $userId;
         $_SESSION['full_name'] = $fullName;
         $_SESSION['role_name'] = $roleName;
+        $_SESSION['avatar'] = $avatar;
+    }
+
+    public static function setAvatar(?string $avatar): void
+    {
+        $_SESSION['avatar'] = $avatar;
     }
 
     /** Xóa session khi logout */

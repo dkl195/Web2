@@ -28,6 +28,7 @@ CREATE TABLE user_profiles (
     student_code VARCHAR(50) DEFAULT NULL,
     faculty VARCHAR(100) DEFAULT NULL,
     class_name VARCHAR(100) DEFAULT NULL,
+    avatar VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
